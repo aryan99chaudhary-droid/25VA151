@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 500px;
+            height: 678;
+            background-color: rgb(246, 148, 141);
+            margin: 20px;
+            padding: 20px;
+            border: 10px dashed rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero sit accusamus minus, veritatis repudiandae, error non voluptas sed delectus asperiores, optio veniam! Nisi vero ullam itaque, qui nam blanditiis consequuntur.
+        </p>
+    </div>
+    <div>
+           <img src="my pic.jpg" alt="image" width="500px" height="600px">
+
+    </div>
+</body>
+</html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Weekly Timetable</title>
+<style>
+  :root{
+    --accent: #2b7cff;
+    --muted: #f4f6fb;
+    --border: #e1e6ef;
+    --text: #1f2d3d;
+    --subject-a: #ffdede;
+    --subject-b: #ffe8cc;
+    --subject-c: #e7f7ff;
+    --subject-d: #e6f7e8;
+    font-family: Inter, system-ui, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body {
+    background:#f2f6fb;
+    color:var(--text);
+    padding:28px;
+    display:flex;
+    justify-content:center;
+  }
+
+  .timetable {
+    width:100%;
+    max-width:1100px;
+    background:white;
+    border-radius:10px;
+    box-shadow: 0 8px 30px rgba(20,30,60,0.08);
+    overflow:hidden;
+    border:1px solid var(--border);
+  }
+
+  .timetable-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 22px;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(90deg, rgba(43,124,255,0.06), rgba(43,124,255,0.02));
+  }
+  .timetable-header h1{
+    font-size:18px;
+    font-weight:600;
+    color:var(--text);
+  }
+  .timetable-header .meta {
+    font-size:13px;
+    color:#4b5a72;
+  }
+
+  /* grid table */
+  .table {
+    display:grid;
+    grid-template-columns: 110px repeat(5, 1fr); /* time column + 5 days */
+    gap:0;
+  }
+
+  /* header row (days) */
+  .cell {
+    border-right:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    padding:12px;
+    min-height:68px;
+  }
+  .cell.day {
+    background:var(--muted);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    letter-spacing:0.4px;
+  }
+  .cell.time {
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
+    color:#33415a;
+  }
+
+  /* body cells */
+  .slot {
+    padding:10px;
+  }
+
+  /* subject card inside a slot */
+  .subject {
+    border-radius:8px;
+    padding:8px 10px;
+    box-shadow: 0 4px 10px rgba(25,40,80,0.04);
+    font-size:13px;
+    line-height:1.2;
+    color:#123;
+    border:1px solid rgba(0,0,0,0.03);
+  }
+
+  .sub-a { background:var(--subject-a); }
+  .sub-b { background:var(--subject-b); }
+  .sub-c { background:var(--subject-c); }
+  .sub-d { background:var(--subject-d); }
+
+  /* make the first column (times) visually distinct */
+  .table > .time-col {
+    border-right:1px solid var(--border);
+    background:#fafcff;
+  }
+
+  /* responsive: convert into stacked rows on small screens */
+  @media (max-width:760px){
+    .table {
+      grid-template-columns: 1fr; /* single column */
+    }
+    .cell.day, .cell.time {
+      display:block;
+      text-align:left;
+    }
+    .table .row {
+      border-bottom:1px solid var(--border);
+      padding:12px 14px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .time-col { min-width:120px; font-weight:700; }
+    .slot { flex:1 1 100%; }
+  }
+
+  /* small polish */
+  .cell:last-child { border-right:none; }
+  .table > .cell { min-height:68px; }
+  .table > .cell.time { min-height:48px; }
+  .legend {
+    display:flex;
+    gap:10px;
+    align-items:center;
+    padding:12px 18px;
+    font-size:13px;
+    color:#46607f;
+  }
+  .legend .item {
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  .legend .box {
+    width:16px;height:12px;border-radius:3px;border:1px solid rgba(0,0,0,0.06);
+  }
+</style>
+</head>
+<body>
+
+<div class="timetable" role="table" aria-label="Weekly timetable">
+  <div class="timetable-header">
+    <h1>Class Timetable — Week A</h1>
+    <div class="meta">Semester 1 • Grade 10</div>
+  </div>
+
+  <!-- Grid table -->
+  <div class="table" role="rowgroup">
+    <!-- top-left empty cell (corner) -->
+    <div class="cell time" role="columnheader" aria-hidden="true">Time</div>
+
+    <!-- day headers -->
+    <div class="cell day" role="columnheader">Monday</div>
+    <div class="cell day" role="columnheader">Tuesday</div>
+    <div class="cell day" role="columnheader">Wednesday</div>
+    <div class="cell day" role="columnheader">Thursday</div>
+    <div class="cell day" role="columnheader">Friday</div>
+
+    <!-- Row 1 -->
+    <div class="cell time time-col" role="rowheader">08:00 - 08:45</div>
+    <div class="cell slot" role="cell"><div class="subject sub-a"><strong>Math</strong><div style="font-size:12px;color:#30435a">Room 101 • Mr. Khan</div></div></div>
+    <div class="cell slot" role="cell"><div class="subject sub-b"><strong>English</strong><div style="font-size:12px;color:#30435a">Room 202 • Ms. Roy</div></div></div>
+    <div class="cell slot" role="cell"><div class="subject sub-c"><strong>Physics</strong><div style="font-size:12px;color:#30435a">Lab 1 • Mr. Das</div></div></div>
+    <div class="cell slot" role="cell"><div class="subject sub-d"><strong>History</strong><div style="font-size:12px;color:#30435a">Room 204 • Ms. Patel</div></div></div>
+    <div class="cell slot" role="cell"><div class="subject sub-a"><strong>Computer</strong><div style="font-size:12px;color:#30435a">Lab 2 • Mr. Singh</div></div></div>
+
+    <!-- Row 2 -->
+    <div class="cell time time-col">08:50 - 09:35</div>
+    <div class="cell slot"><div class="subject sub-b"><strong>Biology</strong><div style="font-size:12px;color:#30435a">Room 103</div></div></div>
+    <div class="cell slot"><div class="subject sub-a"><strong>Math</strong><div style="font-size:12px;color:#30435a">Room 101</div></div></div>
+    <div class="cell slot"><div class="subject sub-d"><strong>Geography</strong><div style="font-size:12px;color:#30435a">Room 205</div></div></div>
+    <div class="cell slot"><div class="subject sub-c"><strong>Chemistry</strong><div style="font-size:12px;color:#30435a">Lab 1</div></div></div>
+    <div class="cell slot"><div class="subject sub-b"><strong>English</strong><div style="font-size:12px;color:#30435a">Room 202</div></div></div>
+
+    <!-- Row 3 -->
+    <div class="cell time time-col">09:45 - 10:30</div>
+    <div class="cell slot"><div class="subject sub-c"><strong>Art</strong><div style="font-size:12px;color:#30435a">Art Room</div></div></div>
+    <div class="cell slot"><div class="subject sub-d"><strong>Sports</strong><div style="font-size:12px;color:#30435a">Gym</div></div></div>
+    <div class="cell slot"><div class="subject sub-a"><strong>Math</strong></div></div>
+    <div class="cell slot"><div class="subject sub-b"><strong>English</strong></div></div>
+    <div class="cell slot"><div class="subject sub-d"><strong>Music</strong></div></div>
+
+    <!-- Row 4 -->
+    <div class="cell time time-col">10:45 - 11:30</div>
+    <div class="cell slot"><div class="subject sub-b"><strong>History</strong></div></div>
+    <div class="cell slot"><div class="subject sub-c"><strong>Physics</strong></div></div>
+    <div class="cell slot"><div class="subject sub-d"><strong>Civics</strong></div></div>
+    <div class="cell slot"><div class="subject sub-a"><strong>Computer</strong></div></div>
+    <div class="cell slot"><div class="subject sub-b"><strong>Library</strong></div></div>
+
+    <!-- Row 5 -->
+    <div class="cell time time-col">11:40 - 12:25</div>
+    <div class="cell slot"><div class="subject sub-d"><strong>Chemistry</strong></div></div>
+    <div class="cell slot"><div class="subject sub-a"><strong>Math</strong></div></div>
+    <div class="cell slot"><div class="subject sub-b"><strong>English</strong></div></div>
+    <div class="cell slot"><div class="subject sub-c"><strong>Biology</strong></div></div>
+    <div class="cell slot"><div class="subject sub-a"><strong>Computer</strong></div></div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="item"><span class="box" style="background:var(--subject-a)"></span>Core / Maths & Tech</div>
+    <div class="item"><span class="box" style="background:var(--subject-b)"></span>Languages</div>
+    <div class="item"><span class="box" style="background:var(--subject-c)"></span>Science / Labs</div>
+    <div class="item"><span class="box" style="background:var(--subject-d)"></span>Humanities / PE</div>
+  </div>
+</div>
+div{
+   <!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Weekly Timetable</title>
+<style>
+  :root{
+    --accent: #2b7cff;
+    --muted: #f4f6fb;
+    --border: #e1e6ef;
+    --text: #1f2d3d;
+    --subject-a: #ffdede;
+    --subject-b: #ffe8cc;
+    --subject-c: #e7f7ff;
+    --subject-d: #e6f7e8;
+    font-family: Inter, system-ui, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body {
+    background:#f2f6fb;
+    color:var(--text);
+    padding:28px;
+    display:flex;
+    justify-content:center;
+  }
+
+  .timetable {
+    width:100%;
+    max-width:1100px;
+    background:white;
+    border-radius:10px;
+    box-shadow: 0 8px 30px rgba(20,30,60,0.08);
+    overflow:hidden;
+    border:1px solid var(--border);
+  }
+
+  .timetable-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 22px;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(90deg, rgba(43,124,255,0.06), rgba(43,124,255,0.02));
+  }
+  .timetable-header h1{
+    font-size:18px;
+    font-weight:600;
+    color:var(--text);
+  }
+  .timetable-header .meta {
+    font-size:13px;
+    color:#4b5a72;
+  }
+
+  /* grid table */
+  .table {
+    display:grid;
+    grid-template-columns: 110px repeat(5, 1fr); /* time column + 5 days */
+    gap:0;
+  }
+
+  /* header row (days) */
+  .cell {
+    border-right:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    padding:12px;
+    min-height:68px;
+  }
+  .cell.day {
+    background:var(--muted);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    letter-spacing:0.4px;
+  }
+  .cell.time {
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
+    color:#33415a;
+  }
+
+  /* body cells */
+  .slot {
+    padding:10px;
+  }
+
+  /* subject card inside a slot */
+  .subject {
+    border-radius:8px;
+    padding:8px 10px;
+    box-shadow: 0 4px 10px rgba(25,40,80,0.04);
+    font-size:13px;
+    line-height:1.2;
+    color:#123;
+    border:1px solid rgba(0,0,0,0.03);
+  }
+
+  .sub-a { background:var(--subject-a); }
+  .sub-b { background:var(--subject-b); }
+  .sub-c { background:var(--subject-c); }
+  .sub-d { background:var(--subject-d); }
+
+  /* make the first column (times) visually distinct */
+  .table > .time-col {
+    border-right:1px solid var(--border);
+    background:#fafcff;
+  }
+
+  /* responsive: convert into stacked rows on small screens */
+  @media (max-width:760px){
+    .table {
+      grid-template-columns: 1fr; /* single column */
+    }
+    .cell.day, .cell.time {
+      display:block;
+      text-align:left;
+    }
+    .table .row {
+      border-bottom:1px solid var(--border);
+      padding:12px 14px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .time-col { min-width:120px; font-weight:700; }
+    .slot { flex:1 1 100%; }
+  }
+
+  /* small polish */
+  .cell:last-child { border-right:none; }
+  .table > .cell { min-height:68px; }
+  .table > .cell.time { min-height:48px; }
+  .legend {
+    display:flex;
+    gap:10px;
+    align-items:center;
+    padding:12px 18px;
+    font-size:13px;
+    color:#46607f;
+  }
+  .legend .item {
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  .legend .box {
+    width:16px;height:12px;border-radius:3px;border:1px solid rgba(0,0,0,0.06);
+  }
+</style>
+</head>
+<body>
+
+<div class="timetable" role="table" aria-label="Weekly timetable">
+  <div class="timetable-header">
+    <h1>Class Timetable — Week A</h1>
+    <div class="meta">Semester 1 • Grade 10</div>
+  </div>
+
+  <!-- Grid table -->
+  <div class="table" role="rowgroup">
+    <!-- top-left empty cell (corner) -->
+    <div class="cell time" role="columnheader" aria-hidden="true">Time</div>
+
+    <!-- day headers -->
+    <div class="cell day" role="columnheader">Monday</div>
+    <div class="cell day" role="columnheader">Tuesday</div>
+    <div class="cell day" role="columnheader">Wednesday</div>
+    <div class="cell day" role="columnheader">Thursday</div>
+    <div class="cell day" role="columnheader">Friday</div>
+
+    <!-- Row 1 -->
+    <div class="cell time time-col" role="rowheader">08:00 - 08:45</div>
+    <div class="cell slot" role="cell"><div class="subject sub-a"><strong>Math</strong><div style="font-size:12px;color:#30435a">Room 101 • Mr. Khan</div></div></div>
+    <div class="cell slot" role="cell"><div class="subject sub-b"><strong>English</strong><div style="font-size:12px;color:#30435a">Room 202 • Ms. Roy</div></div></div>
+    <div class="cell slot" role="cell"><div class="subject sub-c"><strong>Physics</strong><div style="font-size:12px;color:#30435a">Lab 1 • Mr. Das</div></div></div>
+    <div class="cell slot" role="cell"><div class="subject sub-d"><strong>History</strong><div style="font-size:12px;color:#30435a">Room 204 • Ms. Patel</div></div></div>
+    <div class="cell slot" role="cell"><div class="subject sub-a"><strong>Computer</strong><div style="font-size:12px;color:#30435a">Lab 2 • Mr. Singh</div></div></div>
+
+    <!-- Row 2 -->
+    <div class="cell time time-col">08:50 - 09:35</div>
+    <div class="cell slot"><div class="subject sub-b"><strong>Biology</strong><div style="font-size:12px;color:#30435a">Room 103</div></div></div>
+    <div class="cell slot"><div class="subject sub-a"><strong>Math</strong><div style="font-size:12px;color:#30435a">Room 101</div></div></div>
+    <div class="cell slot"><div class="subject sub-d"><strong>Geography</strong><div style="font-size:12px;color:#30435a">Room 205</div></div></div>
+    <div class="cell slot"><div class="subject sub-c"><strong>Chemistry</strong><div style="font-size:12px;color:#30435a">Lab 1</div></div></div>
+    <div class="cell slot"><div class="subject sub-b"><strong>English</strong><div style="font-size:12px;color:#30435a">Room 202</div></div></div>
+
+    <!-- Row 3 -->
+    <div class="cell time time-col">09:45 - 10:30</div>
+    <div class="cell slot"><div class="subject sub-c"><strong>Art</strong><div style="font-size:12px;color:#30435a">Art Room</div></div></div>
+    <div class="cell slot"><div class="subject sub-d"><strong>Sports</strong><div style="font-size:12px;color:#30435a">Gym</div></div></div>
+    <div class="cell slot"><div class="subject sub-a"><strong>Math</strong></div></div>
+    <div class="cell slot"><div class="subject sub-b"><strong>English</strong></div></div>
+    <div class="cell slot"><div class="subject sub-d"><strong>Music</strong></div></div>
+
+    <!-- Row 4 -->
+    <div class="cell time time-col">10:45 - 11:30</div>
+    <div class="cell slot"><div class="subject sub-b"><strong>History</strong></div></div>
+    <div class="cell slot"><div class="subject sub-c"><strong>Physics</strong></div></div>
+    <div class="cell slot"><div class="subject sub-d"><strong>Civics</strong></div></div>
+    <div class="cell slot"><div class="subject sub-a"><strong>Computer</strong></div></div>
+    <div class="cell slot"><div class="subject sub-b"><strong>Library</strong></div></div>
+
+    <!-- Row 5 -->
+    <div class="cell time time-col">11:40 - 12:25</div>
+    <div class="cell slot"><div class="subject sub-d"><strong>Chemistry</strong></div></div>
+    <div class="cell slot"><div class="subject sub-a"><strong>Math</strong></div></div>
+    <div class="cell slot"><div class="subject sub-b"><strong>English</strong></div></div>
+    <div class="cell slot"><div class="subject sub-c"><strong>Biology</strong></div></div>
+    <div class="cell slot"><div class="subject sub-a"><strong>Computer</strong></div></div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="item"><span class="box" style="background:var(--subject-a)"></span>Core / Maths & Tech</div>
+    <div class="item"><span class="box" style="background:var(--subject-b)"></span>Languages</div>
+    <div class="item"><span class="box" style="background:var(--subject-c)"></span>Science / Labs</div>
+    <div class="item"><span class="box" style="background:var(--subject-d)"></span>Humanities / PE</div>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+}
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        div{
+            width:600px;
+            height:400px;
+            background-color:antiquewhite;
+            margin:0 auto;
+            display: flex;
+        }
+        ing(alt){
+            color: red;
+
+        }
+        img{
+            border:2px solid blue
+        }
+        }
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+</html>
